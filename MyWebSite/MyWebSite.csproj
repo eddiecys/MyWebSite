@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D2D1042A-196A-493C-BA7E-648158D8CAD2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyWebSite</RootNamespace>
+    <AssemblyName>MyWebSite</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.91.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember.Signed, Version=1.0.0.9, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\FastMember.Signed.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Contents\CSS\Default.css" />
+    <Content Include="Contents\CSS\jqGrid\ui.jqgrid.css" />
+    <Content Include="Contents\CSS\jQueryBlockUI\images\busy.gif" />
+    <Content Include="Contents\CSS\jQueryBlockUI\jquery.blockUI.css" />
+    <Content Include="Contents\CSS\jQueryCollapse\CollapeBar.png" />
+    <Content Include="Contents\CSS\jQueryCollapse\CollapeBar1.png" />
+    <Content Include="Contents\CSS\jQueryCollapse\ExpandBar.png" />
+    <Content Include="Contents\CSS\jQueryCollapse\images\sprite.png" />
+    <Content Include="Contents\CSS\jQueryCollapse\jquery.collapse.css" />
+    <Content Include="Contents\CSS\jQueryLayout\jquery.layout.css" />
+    <Content Include="Contents\CSS\jQuerySelect2\select2.css" />
+    <Content Include="Contents\CSS\jQuerySelect2\select2.min.css" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Contents\CSS\jQueryUI\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Contents\CSS\jQueryUI\jquery-ui.css" />
+    <Content Include="Contents\CSS\MyCSS.css" />
+    <Content Include="Contents\CSS\Tooltipster\images\map.png" />
+    <Content Include="Contents\CSS\Tooltipster\tooltipster.css" />
+    <Content Include="Contents\Images\calendar-icon.png" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-ar.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-bg.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-bg1251.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-cat.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-cn.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-cs.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-da.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-de.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-dk.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-el.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-en.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-es.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-fa.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-fi.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-fr.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-gl.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-he.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-hr.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-hr1250.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-hu.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-id.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-is.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-it.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-ja.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-kr.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-lt.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-mne.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-nl.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-no.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-pl.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-pt-br.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-pt.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-ro.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-ru.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-sk.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-sr-latin.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-sr.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-sv.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-th.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-tr.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-tw.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-ua.js" />
+    <Content Include="Scripts\jqGrid\i18n\grid.locale-vi.js" />
+    <Content Include="Scripts\jqGrid\jquery.jqGrid.js" />
+    <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jqGrid\jquery.jqGrid.src.js" />
+    <Content Include="Scripts\jqGrid\plugin\grid.combobox.js" />
+    <Content Include="Scripts\jqGrid\plugin\grid.setcolumns.js" />
+    <Content Include="Scripts\jQueryBlockUI\jquery.blockUI.js" />
+    <Content Include="Scripts\jQueryCollapse\jquery.collapse.js" />
+    <Content Include="Scripts\jQueryCollapse\jquery.collapse_cookie_storage.js" />
+    <Content Include="Scripts\jQueryCollapse\jquery.collapse_storage.js" />
+    <Content Include="Scripts\jQueryLayout\jquery.layout.js" />
+    <Content Include="Scripts\jQuerySelect2\select2.js" />
+    <Content Include="Scripts\jQuerySelect2\select2.min.js" />
+    <Content Include="Scripts\jQueryTablednd\jquery.tablednd.js" />
+    <Content Include="Scripts\jQueryUI\jquery-ui.js" />
+    <Content Include="Scripts\jQuery\jquery.js" />
+    <Content Include="Scripts\jQuery\jquery.json.js" />
+    <Content Include="Scripts\jQuery\jquery.migrate.js" />
+    <Content Include="Scripts\jQuery\jquery.url.js" />
+    <Content Include="Scripts\jQuery\json2.js" />
+    <Content Include="Default.aspx" />
+    <Content Include="packages.config" />
+    <Content Include="Scripts\MyScript.js" />
+    <Content Include="Scripts\Tooltipster\jquery.tooltipster.js" />
+    <Content Include="WebForm\Maintain\EditFull.aspx" />
+    <Content Include="WebForm\Maintain\EditTest.aspx" />
+    <Content Include="WebForm\Maintain\EditInline.aspx" />
+    <Content Include="WebForm\Maintain\JqGridCRUD.aspx" />
+    <Content Include="WebForm\Query\DemoTest.aspx" />
+    <Content Include="WebForm\Query\SalesDetail.aspx" />
+    <Content Include="WebForm\Query\SalesDetailFixed.aspx" />
+    <Content Include="Scripts\jqGrid\i18n\vssver2.scc" />
+    <Content Include="Scripts\jqGrid\plugin\vssver2.scc" />
+    <Content Include="Handler\ExportDT2Excel.ashx" />
+    <Content Include="Handler\fileUpload.ashx" />
+    <None Include="Scripts\_references.js" />
+    <None Include="Properties\PublishProfiles\MyWebSite.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="WebForm\MasterPage\DefaultSite.Master" />
+    <Content Include="Handler\Revenue.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\Lang.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Lang.en-US.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Core\BLL\ExtendBLL.cs" />
+    <Compile Include="Core\BLL\RevenueBLL.cs" />
+    <Compile Include="Core\BLL\SalesDetailBLL.cs" />
+    <Compile Include="Core\Common\PageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Core\Common\SystemEnum.cs" />
+    <Compile Include="Core\DAL\ExtendDAL.cs" />
+    <Compile Include="Core\DAL\RevenueDAL.cs" />
+    <Compile Include="Core\DAL\SalesDetailDAL.cs" />
+    <Compile Include="Core\Entity\MyShippingTxnEntity.cs" />
+    <Compile Include="Handler\ExportDT2Excel.ashx.cs">
+      <DependentUpon>ExportDT2Excel.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\fileUpload.ashx.cs">
+      <DependentUpon>fileUpload.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\DBHelper.cs" />
+    <Compile Include="Utility\ExportUtility.cs" />
+    <Compile Include="Utility\JsonHelper.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\NPOIHelper.cs" />
+    <Compile Include="WebForm\Maintain\EditFull.aspx.cs">
+      <DependentUpon>EditFull.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm\Maintain\EditFull.aspx.designer.cs">
+      <DependentUpon>EditFull.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm\Maintain\EditTest.aspx.cs">
+      <DependentUpon>EditTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm\Maintain\EditTest.aspx.designer.cs">
+      <DependentUpon>EditTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm\Maintain\JqGridCRUD.aspx.cs">
+      <DependentUpon>JqGridCRUD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm\Maintain\JqGridCRUD.aspx.designer.cs">
+      <DependentUpon>JqGridCRUD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm\MasterPage\DefaultSite.Master.cs">
+      <DependentUpon>DefaultSite.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm\MasterPage\DefaultSite.Master.designer.cs">
+      <DependentUpon>DefaultSite.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm\Maintain\EditInline.aspx.cs">
+      <DependentUpon>EditInline.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm\Maintain\EditInline.aspx.designer.cs">
+      <DependentUpon>EditInline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm\Query\DemoTest.aspx.cs">
+      <DependentUpon>DemoTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm\Query\DemoTest.aspx.designer.cs">
+      <DependentUpon>DemoTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm\Query\SalesDetail.aspx.cs">
+      <DependentUpon>SalesDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm\Query\SalesDetail.aspx.designer.cs">
+      <DependentUpon>SalesDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm\Query\SalesDetailFixed.aspx.cs">
+      <DependentUpon>SalesDetailFixed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm\Query\SalesDetailFixed.aspx.designer.cs">
+      <DependentUpon>SalesDetailFixed.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\Revenue.ashx.cs">
+      <DependentUpon>Revenue.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Contents\Audio\" />
+    <Folder Include="Contents\Fonts\" />
+    <Folder Include="Contents\Icon\" />
+    <Folder Include="UploadTemp\" />
+    <Folder Include="WebService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Lang.en-US.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Lang.en-US.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Lang.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Lang.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>11973</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:11973/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 封裝。請啟用 NuGet 封裝還原，以下載該封裝。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

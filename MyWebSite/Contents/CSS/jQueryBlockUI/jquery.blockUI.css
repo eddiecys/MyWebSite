@@ -1,0 +1,11 @@
+﻿.BlockUIMessageIcon
+{
+    background: url(images/busy.gif) no-repeat;
+    background-image: url(images/busy.gif);
+    background-repeat: no-repeat;
+    background-position:top left;
+    width: 31px;
+    height: 31px;
+    margin: 0;
+    padding: 0;
+}

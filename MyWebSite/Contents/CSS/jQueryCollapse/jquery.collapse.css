@@ -1,0 +1,94 @@
+.fork {
+  border:0;
+  position:absolute;
+  top:0;
+  right:0;
+}
+
+.col {
+  width: 320px;
+  float: left;
+  /*margin-right:32px;*/
+  /*margin-bottom: 16px;*/
+}
+.c3 {
+  margin-right:0;
+}
+
+
+
+.collapsible {
+  margin: 0;
+  /*background:url("CollapeBar1.png") no-repeat; /*收合後Bar顏色*/
+  background-color: RGB(0,116,188);
+  color: black;
+  height: 35px;
+  line-height: 35px;
+  vertical-align: middle;
+  border-color: RGB(133,201,239);
+  border-style: solid;
+  border-width: thin;
+  color: RGB(254,201,1);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+
+
+}
+
+.collapsible a  {
+  background: url("images/sprite.png") 15px 13px no-repeat;
+  /*background: url("ExpandBar.png") no-repeat; /* Bar圖案*/
+  /*background-color: RGB(0,116,188);*/
+ 
+  /*text-indent: 20px; 字縮排*/
+  display: block;
+  padding: 2px 0 0 35px; /*字的位置*/
+  color: RGB(254,201,1);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 35px;
+
+  vertical-align:middle;  
+  border-bottom: thin solid RGB(133,201,239);
+  text-shadow: 1px 1px 1px gray;
+}
+.collapsible:hover 
+{ /*background: url("ExpandBar.png") no-repeat; */
+  background-color: RGB(0,116,188);
+  
+  
+  }
+.collapsible.close a
+{
+    /*background: url("CollapeBar.png") no-repeat; */
+    background-color: #4297d7;
+    
+    
+}
+.collapsible.open    /*打開後Bar顏色*/
+{
+/*background: #abe0aa; /* Old browsers */
+/*background: -moz-linear-gradient(top,  #abe0aa 0%, #2cea2c 70%, #1ebf49 86%, #01a001 100%); /* FF3.6+ */
+/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#abe0aa), color-stop(70%,#2cea2c), color-stop(86%,#1ebf49), color-stop(100%,#01a001)); /* Chrome,Safari4+ */
+/*background: -webkit-linear-gradient(top,  #abe0aa 0%,#2cea2c 70%,#1ebf49 86%,#01a001 100%); /* Chrome10+,Safari5.1+ */
+/*background: -o-linear-gradient(top,  #abe0aa 0%,#2cea2c 70%,#1ebf49 86%,#01a001 100%); /* Opera 11.10+ */
+/*background: -ms-linear-gradient(top,  #abe0aa 0%,#2cea2c 70%,#1ebf49 86%,#01a001 100%); /* IE10+ */
+/*background: linear-gradient(to bottom,  #abe0aa 0%,#2cea2c 70%,#1ebf49 86%,#01a001 100%); /* W3C */
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#abe0aa', endColorstr='#01a001',GradientType=0 ); /* IE6-9 */
+background-color: #5c9ccc;
+
+
+    }
+.collapsible.open a 
+    /*{background-position: 0px 0px;}*/
+     { background-position: 13px -25px;  } /* open時圖案位置*/
+.collapsible + div { padding: 0px; }
+
+
+/* Pre hide sections with JavaScript on
+--- */
+.collapsible+div {
+  display: none;
+}

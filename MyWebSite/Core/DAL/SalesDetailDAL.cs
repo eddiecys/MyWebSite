@@ -30,7 +30,7 @@ namespace MyWebSite.Core.DAL
             var conn = dbRetail.Connection;
             var MyShippingTxn = conn.Query<MyShippingTxnEntity>("select * from MY_SHIPPING_TXN_V").ToList();
 //            var MyShippingTxn = conn.Query<MyShippingTxnEntity>("select TxnSeq,OrderDate,TxnNumber from MY_SHIPPING_TXN_V").ToList();
- 
+
             return MyShippingTxn;
         }
 

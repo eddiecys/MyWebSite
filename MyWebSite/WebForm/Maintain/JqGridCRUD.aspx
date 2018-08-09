@@ -11,7 +11,6 @@
     <link href="../../Contents/CSS/jQueryUI/jquery-ui.css" rel="stylesheet" type="text/css" />
     <link href="../../Contents/CSS/jqGrid/ui.jqgrid.css" rel="stylesheet" type="text/css" />
     <link href="../../Contents/CSS/jQueryLayout/jquery.layout.css" rel="stylesheet" type="text/css" />
-    <link href="../../Contents/CSS/jQuerySelect2/select2.css" rel="stylesheet" type="text/css" />
 
     <script src="../../Scripts/jQuery/jquery.js" type="text/javascript"></script>
     <%--<script src="../../Scripts/jQuery/jquery.migrate.js" type="text/javascript"></script>--%>
@@ -21,7 +20,6 @@
     <script src="../../Scripts/jqGrid/i18n/grid.locale-en.js" type="text/javascript"></script>
     <%--<script src="../../Scripts/jQuery/jquery.url.js" type="text/javascript"></script>--%>
     <script src="../../Scripts/jQueryBlockUI/jquery.blockUI.js" type="text/javascript"></script>
-    <script src="../../Scripts/jQuerySelect2/select2.js" type="text/javascript"></script>
     <script src="../../Scripts/MyScript.js" type="text/javascript"></script>
     
 
@@ -36,7 +34,7 @@
         };
 
         //參數
-        var oPostData = { rYear: [""], createDateFrom: "", createDateTo: "" }
+        var oPostData = { rYear: "", createDateFrom: "", createDateTo: "" }
 
         $(function () {
             //xalert("document.ready start");
@@ -63,13 +61,6 @@
                 //return false;
             });
 
-            $("#ddlRYear").select2({
-                placeholder: "請選擇年度",
-                allowClear: true,
-                //multiple: "multiple", //寫在這會造成預設第一個option會被選取
-                width: "350px",
-                closeOnSelect: false
-            });
             
         };
 
@@ -124,16 +115,12 @@
 
             //取得Query參數
             getPostParam();
-            //alert("getPostParam()");
 
             if (!checkDateRange($("#txtCreateDateFrom").val(), $("#txtCreateDateTo").val())) {
                 ShowMsg("日期起迄錯誤!", "Warning");
             } else {
                 // loadonce: true 後,datatype會變成local, 造成 trigger("reloadGrid") 無效, 都抓client data, 要重新把datatype:'json'
-//                $("#grid").jqGrid('setGridParam', { url: "JqGridCRUD.aspx/Query", mtype: 'POST', datatype: 'json', postData: oPostData, page: 1 }).trigger("reloadGrid");
-                console.log("reload start=> " + JSON.stringify(oPostData));
-                $("#grid").jqGrid('setGridParam', { url: "JqGridCRUD.aspx/QueryDapper", mtype: 'POST', datatype: 'json', postData: oPostData, page: 1 }).trigger("reloadGrid");
-                
+                $("#grid").jqGrid('setGridParam', { url: "JqGridCRUD.aspx/Query", mtype: 'POST', datatype: 'json', postData: oPostData, page: 1 }).trigger("reloadGrid");
             }
 
             //GetData();
@@ -145,23 +132,19 @@
         function getPostParam() {
 
             //var rYearValue = $("#" + ClientIDs.ddlRYear).val();
-            var rYearValue = $("[id$=ddlRYear]").val() || "";
-            oPostData.rYear = rYearValue == "" ? [""] : rYearValue;
-//            oPostData.rYear = rYearValue;
+            var rYearValue = $("[id$=ddlRYear]").val();
+            oPostData.rYear = rYearValue || "";
 
             oPostData.createDateFrom = $("[id$=txtCreateDateFrom]").val() || "";
             oPostData.createDateTo = $("[id$=txtCreateDateTo]").val() || "";
             //return oPostData;
-
-            console.log(JSON.stringify(oPostData));
-            //alert(JSON.stringify(oPostData));
         }
 
         function LoadDefault() {
             // 預設今天日期
             //$("#txtCreateDateFrom").val($.datepicker.formatDate('yy-mm-dd', new Date()));
 
-            //新增修改視窗中的ddl重新給值
+            //ddl重新給值
             //清空options
             $("[id$=dl_ddl_R_YEAR]").empty();
             //一個一個加入
@@ -172,15 +155,9 @@
             // $("[id$=ddlRYear] option").clone().appendTo($("[id$=dl_ddl_R_YEAR]"));
             //$("[id$=ddlRYear]").val("2000");
 
-
-            //getPostParam();
-
-//            var urlpath = "Query";
-            var urlpath = "QueryDapper";
-
             var grid = $("#grid");
             grid.jqGrid({
-                url: "JqGridCRUD.aspx/" + urlpath,
+                url: "JqGridCRUD.aspx/Query",
                 datatype: "json",
                 postData: oPostData,
                 mtype: 'POST',
@@ -257,9 +234,9 @@
                     modal: true,
                     buttons: {
                         'OK': function () {
-                            var oSaveData = { act: "Del", index: "", param: "" }
-                            oSaveData.index = $("#grid").jqGrid('getRowData', rowid).R_ID;
-                            Save(oSaveData);
+                            var oPostData = { act: "Del", index: "", param: "" }
+                            oPostData.index = $("#grid").jqGrid('getRowData', rowid).R_ID;
+                            Save(oPostData);
 
                             $(this).dialog('close');
                         },
@@ -271,10 +248,10 @@
 
                 // 使用瀏覽器內建的popup window
                 //if (confirm('Are you sure you want to delete this row?')) {
-                //    var oSaveData = { act: "Del", index: "", param: "" }
-                //    //oSaveData.index = $("#grid").jqGrid('getRowData', rowid).index;
-                //    oSaveData.index = $("#grid").jqGrid('getRowData', rowid).R_ID;
-                //    Save(oSaveData);
+                //    var oPostData = { act: "Del", index: "", param: "" }
+                //    //oPostData.index = $("#grid").jqGrid('getRowData', rowid).index;
+                //    oPostData.index = $("#grid").jqGrid('getRowData', rowid).R_ID;
+                //    Save(oPostData);
                 //}
             });
         }
@@ -306,18 +283,18 @@
                 buttons: {
                     //'確認': function () {
                     'Submit': function () {
-                        var oSaveData = { act: "", index: "", param: "" }
-                        oSaveData.act = act;
+                        var oPostData = { act: "", index: "", param: "" }
+                        oPostData.act = act;
                         if (act == "Mod") {
-                            //oSaveData.index = $("#grid").jqGrid('getRowData', rowid).index;
-                            oSaveData.index = $("#grid").jqGrid('getRowData', rowid).R_ID;
+                            //oPostData.index = $("#grid").jqGrid('getRowData', rowid).index;
+                            oPostData.index = $("#grid").jqGrid('getRowData', rowid).R_ID;
                         }
-                        //oSaveData.param = JSON.stringify($("#divDialog input:text").serializeArray());
+                        //oPostData.param = JSON.stringify($("#divDialog input:text").serializeArray());
                         //divDialog 取出所有輸入型態為 text, select 欄位,serializeArray轉為java srcipt的物件陣列,stringify再序列化為JSON字串  
-                        oSaveData.param = JSON.stringify($("#divDialog input:text,#divDialog select").serializeArray());
+                        oPostData.param = JSON.stringify($("#divDialog input:text,#divDialog select").serializeArray());
                         //divDialog所有可輸入的
-                        //oSaveData.param = JSON.stringify($("#divDialog :input").serializeArray());
-                        Save(oSaveData);
+                        //oPostData.param = JSON.stringify($("#divDialog :input").serializeArray());
+                        Save(oPostData);
                         $(this).dialog('close');
                     },
                     'Cancel': function () {
@@ -355,14 +332,11 @@
             $("#divDialog").find('select').each(function () { $(this).val(''); });
         }
 
-        function Save(oSaveData) {
-            //var urlPath = "Save";
-            var urlPath = "SaveDapper";
-
+        function Save(oPostData) {
             $.ajax({
                 type: "POST",
-                url: "JqGridCRUD.aspx/" + urlPath,
-                data: JSON.stringify(oSaveData),
+                url: "JqGridCRUD.aspx/Save",
+                data: JSON.stringify(oPostData),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 beforeSend: function () {
@@ -400,37 +374,35 @@
                 <div style="width: 95%" align="left">
                     <table>
                         <tr>
-                            <td style="width:28%;" class="TD_Title">
+                            <td style="width:20%;" class="TD_Title">
                                 <asp:Label ID="lblTitleRYear" runat="server" Text="Revenue Year:"></asp:Label>
                             </td>
-                            <td style="width:60%;" colspan="3">
-                                <%--<asp:DropDownList ID="ddlRYear" runat="server" width="100px" class="FormElement ui-widget-content ui-corner-all " ></asp:DropDownList>--%>
-                                <asp:DropDownList ID="ddlRYear" runat="server" multiple="multiple"></asp:DropDownList>
+                            <td >
+                                <asp:DropDownList ID="ddlRYear" runat="server" width="100px" class="FormElement ui-widget-content ui-corner-all "></asp:DropDownList>
+                            </td>
+                            <td  style="width:20%;">
                             </td>
                             <td >
+                            </td>
+                            <td style="width:12%;">
                                 <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn" Text="Search"></asp:LinkButton>
                                 <%--<button type="button2" id="lbtnSearch" class="ui-button ui-widget ui-corner-all">Search</button>--%>
                             </td>
                         </tr>
                         <tr >
-                            <td style="width:28%;" class="TD_Title">
+                            <td style="width:20%;" class="TD_Title">
                                 <asp:Label ID="lblCreateDateFrom" runat="server" Text="CreateDate From:"></asp:Label>
                             </td>
-                            <td style="width:20%;">
+                            <td >
                                 <input id="txtCreateDateFrom" type="text" style="width:100px;" class=" ui-widget-content ui-corner-all " />
                             </td>
                             <td style="width:20%;" class="TD_Title">
                                 <asp:Label ID="lblCreateDateTo" runat="server" Text="To:"></asp:Label>
                             </td>
-                            <td style="width:20%;">
+                            <td >
                                 <input id="txtCreateDateTo" type="text" style="width:100px;" class=" ui-widget-content ui-corner-all " />
                             </td>
-                            <td >
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan ="5">
-                                <asp:TextBox ID="ttbYearList" runat="server" style="width:200px;"></asp:TextBox>
+                            <td style="width:12%;">
                             </td>
                         </tr>
                     </table>

@@ -5,16 +5,12 @@ using System.Web;
 using MyWebSite.Utility;
 using System.Data;
 using System.Text;
-using Dapper;
-using MyWebSite.Core.Entity;
-using System.Data.Common;
 
 namespace MyWebSite.Core.DAL
 {
     public class RevenueDAL
     {
         DBHelper dbRetail;
-        private DbConnection conn;
 
         /// <summary>
         /// contructor
@@ -23,7 +19,6 @@ namespace MyWebSite.Core.DAL
         public RevenueDAL(DBHelper dbRtl)
         {
             this.dbRetail = dbRtl;
-            this.conn = this.dbRetail.Connection;
         }
 
         public DataTable GetRYear()
@@ -50,115 +45,6 @@ namespace MyWebSite.Core.DAL
             }
         }
 
-        //使用Dapper
-        public List<MyRevenueEntity> GetRevenueDataDapper(string rYear, string createDateFrom, string createDateTo)
-        {
-            try
-            {
-                //var conn = dbRetail.Connection;
-
-                StringBuilder sbSql = new StringBuilder();
-
-                sbSql.Append("select R_ID");
-                sbSql.Append("      ,R_YEAR ");
-                sbSql.Append("      ,REVENUE ");
-                sbSql.Append("      ,REMARK ");
-                sbSql.Append("      ,CREATE_DATE ");
-                sbSql.Append("  from MY_REVENUE ");
-                sbSql.Append(" where 1=1");
-
-                List<string> rYearList = new List<string>();
-                if (!rYear.Equals(string.Empty))
-                {
-                    if (rYear.Contains(","))
-                    {
-                        rYearList = rYear.Split(',').ToList<string>();
-                        
-                        sbSql.Append(" and R_YEAR in  @rYearList");
-                    }
-                    else
-                    {
-                        sbSql.Append(" and R_YEAR = @rYear ");
-                    }
-                }
-                if (!createDateFrom.Equals(string.Empty))
-                {
-                    sbSql.Append(" and CREATE_DATE >= @createDateFrom ");
-                }
-                if (!createDateTo.Equals(string.Empty))
-                {
-                    sbSql.Append(" and CREATE_DATE <= @createDateTo ");
-                }
-                sbSql.Append(" order by R_YEAR asc ");
-
-                var SQLParam = new { rYear = rYear, createDateFrom = createDateFrom, createDateTo = createDateTo, rYearList = rYearList };
-                
-
-                var MyRevenueTxn = conn.Query<MyRevenueEntity>(sbSql.ToString(), SQLParam).ToList();
-
-                //    //或是用不傳入entity使用弱型別, 會回傳IEnumerable<dynamic>, 欄位名稱要自己打且大小寫要符合, 在程式跑起來才知道錯誤
-                //    //如果只需要一個或兩個欄位, 不想定義entity, 可以用下面方式
-                //    //var MyRevenueTxn = conn.Query("select * from MY_REVENUE").ToList();
-                //
-                //foreach (var item in MyRevenueTxn)
-                //{
-                //    //因為conn.Query有傳入強型別的Entity, 所以item. 可以用帶出entity定義的欄位名稱, 在開發階段就可以知道錯誤
-                //    var result = item.R_YEAR + item.REVENUE;
-                //}
-
-                return MyRevenueTxn;
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        //使用Dapper
-        public bool SaveRevenueDataDapper(string act, MyRevenueEntity RevenueEntityRecord)
-        {
-            // 也可以傳入entity的集合,  List<MyRevenueEntity> RevenueEntityRecords
-            //List<MyRevenueEntity> RevenueEntityRecords = new List<MyRevenueEntity>();
-
-            try
-            {
-                StringBuilder sbSql = new StringBuilder();
-
-                if (act == "Add")
-                {
-                    sbSql.Append(" insert into MY_REVENUE ");
-                    sbSql.Append(" (R_YEAR,REVENUE,REMARK,CREATE_DATE) ");
-                    sbSql.Append(" values ");
-                    sbSql.Append(" (@R_YEAR,@REVENUE,@REMARK,@CREATE_DATE) ");
-                }
-                else if (act == "Mod")
-                {
-                    sbSql.Append(" update MY_REVENUE ");
-                    sbSql.Append(" set R_YEAR = @R_YEAR ");
-                    sbSql.Append(" , REVENUE = @REVENUE ");
-                    sbSql.Append(" , REMARK = @REMARK ");
-                    sbSql.Append(" where R_ID = @R_ID ");
-                }
-                else if (act == "Del")
-                {
-                    sbSql.Append(" delete MY_REVENUE ");
-                    sbSql.Append(" where R_ID = @R_ID ");
-                }
-
-                //如果是一次多筆可以傳入List<Entity>
-                //if (conn.Execute(sbSql.ToString(), RevenueEntityRecords) <= RevenueEntityRecords.Count)
-                if (conn.Execute(sbSql.ToString(), RevenueEntityRecord) <= 0)
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
         /// <summary>
         /// 取得Revenue資料

@@ -651,10 +651,7 @@
             if ($("#" + ClientIDs.hdnParameterA).val() === 'Y')
                 urlPath = "InitGrid";
             else
-//                urlPath = "QueryGrid";
-               urlPath = "QueryGridDapper"; //使用Dapper ORM
-
-            
+                urlPath = "QueryGrid";
 
             var sdgrid = $("#gvSalesDetail");
             //alert('開始執行');
@@ -829,8 +826,7 @@
             $("#" + ClientIDs.hdnParameterA).val('N');
             //alert($("#" + ClientIDs.hdnParameterA).val());
 
-//            $("#gvSalesDetail").jqGrid('setGridParam', { url: "DemoTest.aspx/QueryGrid", mtype: 'POST', datatype: 'json', postData: oPostData, page: 1 }).trigger("reloadGrid");
-            $("#gvSalesDetail").jqGrid('setGridParam', { url: "DemoTest.aspx/QueryGridDapper", mtype: 'POST', datatype: 'json', postData: oPostData, page: 1 }).trigger("reloadGrid");
+            $("#gvSalesDetail").jqGrid('setGridParam', { url: "DemoTest.aspx/QueryGrid", mtype: 'POST', datatype: 'json', postData: oPostData, page: 1 }).trigger("reloadGrid");
 
         }
 

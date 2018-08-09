@@ -5,7 +5,6 @@ using System.Web;
 using MyWebSite.Utility;
 using System.Data;
 using MyWebSite.Core.DAL;
-using MyWebSite.Core.Entity;
 
 namespace MyWebSite.Core.BLL
 {
@@ -19,14 +18,6 @@ namespace MyWebSite.Core.BLL
         public SalesDetailBLL()
         {
             dbRetail = DBHelper.GetDB("EddieDBSQLServer");
-        }
-
-        public List<MyShippingTxnEntity> GetSalesDetailList(string dateFrom, string dateTo, string prodGroup, string cityName, string storeNo)
-        {
-            SalesDetailDAL sdDAL = new SalesDetailDAL(dbRetail);
-            var SalesDeatilList = sdDAL.GetSalesDetailList(dateFrom, dateTo, prodGroup, cityName, storeNo);
-            
-            return SalesDeatilList;
         }
 
         public DataTable GetProdGroupData()

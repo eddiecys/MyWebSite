@@ -263,6 +263,7 @@
     <Compile Include="Core\DAL\ExtendDAL.cs" />
     <Compile Include="Core\DAL\RevenueDAL.cs" />
     <Compile Include="Core\DAL\SalesDetailDAL.cs" />
+    <Compile Include="Core\Entity\MyRevenueEntity.cs" />
     <Compile Include="Core\Entity\MyShippingTxnEntity.cs" />
     <Compile Include="Handler\ExportDT2Excel.ashx.cs">
       <DependentUpon>ExportDT2Excel.ashx</DependentUpon>

@@ -5,6 +5,7 @@ using System.Web;
 using MyWebSite.Utility;
 using System.Data;
 using MyWebSite.Core.DAL;
+using MyWebSite.Core.Entity;
 
 
 namespace MyWebSite.Core.BLL
@@ -19,6 +20,30 @@ namespace MyWebSite.Core.BLL
         public RevenueBLL()
         {
             dbRetail = DBHelper.GetDB("EddieDBSQLServer");
+        }
+
+        public List<MyRevenueEntity> GetRevenueDataDapper(string rYear, string createDateFrom, string createDateTo)
+        {
+            RevenueDAL rvDAL = new RevenueDAL(dbRetail);
+            var RevenueList = rvDAL.GetRevenueDataDapper(rYear, createDateFrom, createDateTo);
+
+            return RevenueList;
+        }
+
+        public bool SaveRevenueDataDapper(string act, int revenueId, string revenueYear, decimal revenueAmt, string remark)
+        {
+            RevenueDAL rvDAL = new RevenueDAL(dbRetail);
+
+            var RevenueEntityRecord = new MyRevenueEntity();
+            RevenueEntityRecord.R_ID = revenueId;
+            RevenueEntityRecord.R_YEAR = revenueYear;
+            RevenueEntityRecord.REVENUE = revenueAmt;
+            RevenueEntityRecord.REMARK = remark;
+            RevenueEntityRecord.CREATE_DATE = DateTime.Now;
+
+            bool rFlag = rvDAL.SaveRevenueDataDapper(act, RevenueEntityRecord);
+
+            return rFlag;
         }
 
         public DataTable GetRevenueData(string rYear, string createDateFrom, string createDateTo)

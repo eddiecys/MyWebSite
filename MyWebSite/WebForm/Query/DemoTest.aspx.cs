@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.Services;
 using System.Data;
 using MyWebSite.Core.BLL;
-using MyWebSite.Core.DAL;
+//using MyWebSite.Core.DAL;
 using MyWebSite.Utility;
 using System.IO;
 using MyWebSite.Core.Common;
@@ -200,36 +200,31 @@ namespace MyWebSite.WebForm.Query
                 //if (initFlag == "Y")
                 //    return "[]";
 
-                SalesDetailDAL sdDAL = new SalesDetailDAL(DBHelper.GetDB("EddieDBSQLServer"));
-                string jsonString = JsonHelper.ObjToJson(sdDAL.GetSalesDetailList());
+                SalesDetailBLL sdBLL = new SalesDetailBLL();
+                DataTable dt;
+                string jsonString = string.Empty;
 
-                return jsonString;
+                dt = sdBLL.GetSalesDatailData(dateFrom, dateTo, prodGroup, cityName, storeNo);
 
-                //SalesDetailBLL sdBLL = new SalesDetailBLL();
-                //DataTable dt;
-                //string jsonString = string.Empty;
+                // Convert to json string and Dispose
+                if (dt != null)
+                {
+                    //jsonString = JsonHelper.JsonSerializer(dt);  
+                    jsonString = JsonHelper.DataTableToJson(dt);
+                    dt.Dispose();
+                    dt = null;
+                }
+                //  sdBLL = null;
 
-                //dt = sdBLL.GetSalesDatailData( dateFrom, dateTo, prodGroup, cityName, storeNo);
-
-                //// Convert to json string and Dispose
-                //if (dt != null)
-                //{
-                //    //jsonString = JsonHelper.JsonSerializer(dt);  
-                //    jsonString = JsonHelper.DataTableToJson(dt);
-                //    dt.Dispose();
-                //    dt = null;
-                //}
-                ////  sdBLL = null;
-
-                ////TextBox1.Text = jsonString;
-                //if (!string.Equals(jsonString, string.Empty))
-                //{
-                //    return jsonString;
-                //}
-                //else
-                //{
-                //    return "[]";
-                //}
+                //TextBox1.Text = jsonString;
+                if (!string.Equals(jsonString, string.Empty))
+                {
+                    return jsonString;
+                }
+                else
+                {
+                    return "[]";
+                }
             }
             catch (Exception ex)
             {
@@ -238,7 +233,24 @@ namespace MyWebSite.WebForm.Query
 
         }
 
-        
+        [WebMethod]
+        public static string QueryGridDapper(string dateFrom, string dateTo, string prodGroup, string cityName, string storeNo)
+        {
+            try
+            {
+                SalesDetailBLL sdBLL = new SalesDetailBLL();
+                string jsonString = JsonHelper.ObjToJson(sdBLL.GetSalesDetailList(dateFrom, dateTo, prodGroup, cityName, storeNo));
+
+                return jsonString;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
 
 
         [WebMethod]

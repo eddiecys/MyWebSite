@@ -24,12 +24,55 @@ namespace MyWebSite.Core.DAL
         }
 
         //使用Dapper將Entity跟DB mapping
-        public List<MyShippingTxnEntity> GetSalesDetailList()
+        public List<MyShippingTxnEntity> GetSalesDetailList(string dateFrom, string dateTo, string prodGroup, string cityName, string storeNo)
         {
-            //var MyShippingTxnList;
             var conn = dbRetail.Connection;
-            var MyShippingTxn = conn.Query<MyShippingTxnEntity>("select * from MY_SHIPPING_TXN_V").ToList();
-//            var MyShippingTxn = conn.Query<MyShippingTxnEntity>("select TxnSeq,OrderDate,TxnNumber from MY_SHIPPING_TXN_V").ToList();
+            //可以不用只對
+            //var MyShippingTxn = conn.Query<MyShippingTxnEntity>("select * from MY_SHIPPING_TXN_V").ToList();
+
+            StringBuilder sbSql = new StringBuilder();
+
+            sbSql.Append("select TOP 100000 TxnSeq");
+            sbSql.Append("      ,OrderDate ");
+            sbSql.Append("      ,TxnNumber ");
+            sbSql.Append("      ,StoreNo ");
+            sbSql.Append("      ,StoreName ");
+            sbSql.Append("      ,ProdCode ");
+            sbSql.Append("      ,ProdName");
+            sbSql.Append("      ,TxnQty");
+            sbSql.Append("      ,Price ");
+            sbSql.Append("      ,Amt ");
+            sbSql.Append("      ,CreateDate ");
+            sbSql.Append("  from MY_SHIPPING_TXN_V ");
+            sbSql.Append(" where  1=1 ");
+
+            //var SQLparam = new MyShippingTxnEntity();
+
+            var SQLparam = new { dateFrom = dateFrom, dateTo = dateTo, prodGroup = prodGroup, cityName = cityName, storeNo = storeNo };
+
+            if (!string.IsNullOrEmpty(dateFrom))
+            {
+                sbSql.Append(" and OrderDate >= @dateFrom ");
+            }
+            if (!string.IsNullOrEmpty(dateTo))
+            {
+                sbSql.Append(" and OrderDate <= @dateTo ");
+            }
+            if (!string.IsNullOrEmpty(prodGroup))
+            {
+                sbSql.Append(" and ProdCode = @prodGroup ");
+            }
+            if (!string.IsNullOrEmpty(cityName))
+            {
+                sbSql.Append(" and CityName = @cityName ");
+            }
+            if (!string.IsNullOrEmpty(storeNo))
+            {
+                sbSql.Append(" and StoreNo = @storeNo ");
+            }
+            sbSql.Append(" order by TxnSeq ");
+
+            var MyShippingTxn = conn.Query<MyShippingTxnEntity>(sbSql.ToString(), SQLparam).ToList();
 
             return MyShippingTxn;
         }

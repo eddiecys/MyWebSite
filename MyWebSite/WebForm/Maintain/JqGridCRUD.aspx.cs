@@ -57,6 +57,64 @@ namespace MyWebSite.WebForm.Maintain
             }
         }
 
+
+        [WebMethod]
+        public static string QueryDapper(string[] rYear, string createDateFrom, string createDateTo)
+        {
+            // WebMethod 不在asp.net 的live cycle生命週期中, 所以不能控制page control(如text box等等)
+            // 且一定要static, 因為可以不用真的有一個instance, 就可以執行  
+
+            RevenueBLL rvBLL = new RevenueBLL();
+            string strYear = string.Empty;
+            if (rYear[0] == "")
+                strYear = "";
+            else
+                strYear = string.Join(",", rYear);
+           
+
+            string jsonString = JsonHelper.ObjToJson(rvBLL.GetRevenueDataDapper(strYear, createDateFrom, createDateTo));
+
+            return jsonString;
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json, UseHttpGet = false)]
+        public static object SaveDapper(string act, string index, string param)
+        {
+
+            //param 格式 [{"name":"R_YEAR","value":"1234"},{"name":"REVENUE","value":"2000"},{"name":"REMARK","value":"dfjdkfd"}]
+
+            string type = "", message = "";
+
+            try
+            {
+                DataTable dtParam = JsonHelper.JsonToDataTable(param);
+                int rId = string.IsNullOrEmpty(index) ? 0 : Convert.ToInt32(index);
+                string revenueYear = string.IsNullOrEmpty(param) ? "" : GetValueByName(dtParam, "R_YEAR");
+                decimal revenueAmt = string.IsNullOrEmpty(param) ? 0 : Convert.ToDecimal(GetValueByName(dtParam, "REVENUE"));
+                string remark = string.IsNullOrEmpty(param) ? "" : GetValueByName(dtParam, "REMARK");
+
+                RevenueBLL rvBLL = new RevenueBLL();
+                bool result = false;
+
+                result = rvBLL.SaveRevenueDataDapper(act, rId, revenueYear, revenueAmt, remark);
+
+                type = "Success";
+                message = result ? act +" Successfully" : act + " Failed";
+
+                rvBLL = null;
+
+            }
+            catch (Exception ex)
+            {
+                type = "Error";
+                message = ex.Message;
+            }
+
+            return new { type = type, message = message };
+        }
+
+
         [WebMethod]
         public static string Query(string rYear, string createDateFrom, string createDateTo)
         {

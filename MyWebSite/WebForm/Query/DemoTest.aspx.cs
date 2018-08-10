@@ -16,10 +16,36 @@ namespace MyWebSite.WebForm.Query
 {
     public partial class DemoTest : System.Web.UI.Page
     {
+
+        static string staticParam;
+        string nonstaticPartm;
+        public static void testStatic()
+        {
+            staticParam = "這樣寫不會出錯, static method只可以使用static param";
+            //nonstaticPartm = "這樣寫會出錯, 不可用instance param, 會出現 需要有物件參考, 才可以使用非靜態欄位方法或屬性";
+        }
+
+        public void testStatic2()
+        {
+            //非static method可以同時使用
+            staticParam = "這樣寫不會出錯";
+            nonstaticPartm = "這樣寫不會出錯";
+        }
+
+        protected void btnLog4net_Click(object sender, EventArgs e)
+        {
+            //各等級的log顯示,顯示的等級會根據設定檔的設定而不同
+            //等級: debug < info < warn < error < fatal
+
+            LogHelper.Info("HelloEddieChen");
+
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
+
                 lbLanguage.Text = Page.UICulture;//查看網頁的語系
 
                 #region ddl binding
@@ -162,6 +188,7 @@ namespace MyWebSite.WebForm.Query
         [WebMethod]
         public static string SayHello(string name, string sex)
         {
+            
             return string.Format("Hello {0}, 您是{1}生!",name, sex);
         }
 
@@ -228,7 +255,8 @@ namespace MyWebSite.WebForm.Query
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogHelper.Error(ex.Message, ex);
+                throw;
             }
 
         }
@@ -246,7 +274,8 @@ namespace MyWebSite.WebForm.Query
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogHelper.Error(ex.Message, ex);
+                throw;
             }
 
         }
@@ -289,6 +318,8 @@ namespace MyWebSite.WebForm.Query
                 throw ex;
             }
         }
+
+
 
         /// <summary>
         /// 此Event目前沒有用, 因為會postback

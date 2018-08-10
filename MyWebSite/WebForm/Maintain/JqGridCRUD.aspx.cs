@@ -34,6 +34,7 @@ namespace MyWebSite.WebForm.Maintain
             
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -59,20 +60,23 @@ namespace MyWebSite.WebForm.Maintain
 
 
         [WebMethod]
-        public static string QueryDapper(string[] rYear, string createDateFrom, string createDateTo)
+        public static string QueryDapper(string rYear, string createDateFrom, string createDateTo)
         {
             // WebMethod 不在asp.net 的live cycle生命週期中, 所以不能控制page control(如text box等等)
             // 且一定要static, 因為可以不用真的有一個instance, 就可以執行  
 
             RevenueBLL rvBLL = new RevenueBLL();
-            string strYear = string.Empty;
-            if (rYear[0] == "")
-                strYear = "";
-            else
-                strYear = string.Join(",", rYear);
-           
 
-            string jsonString = JsonHelper.ObjToJson(rvBLL.GetRevenueDataDapper(strYear, createDateFrom, createDateTo));
+            //rYear若是用string[]或List<string> 會有殘存的問題, 如第一次 [123,234,345] , 第二次 [123,345] 但卻收到 [123,345,345]
+            //string strYear = string.Empty;
+            //if (rYear[0] == "")
+            //    strYear = "";
+            //else
+            //    strYear = string.Join(",", rYear);
+
+            Console.WriteLine(rYear);
+
+            string jsonString = JsonHelper.ObjToJson(rvBLL.GetRevenueDataDapper(rYear, createDateFrom, createDateTo));
 
             return jsonString;
         }

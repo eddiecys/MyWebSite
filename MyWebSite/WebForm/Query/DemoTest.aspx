@@ -1093,6 +1093,9 @@
                     <td colspan="3">
                         <asp:DropDownList ID="ddlYearMultiple" runat="server"　 multiple="multiple"></asp:DropDownList>
                         <asp:Button ID="btnShowSelect2Value" runat="server" class="btn" Text="秀出Select2值" style="cursor:pointer;" />
+
+                            <asp:Button ID="btnLog4net" runat="server" Text="log4net" OnClick="btnLog4net_Click" class="btn" />
+
                     </td>
                     <td style="text-align:right; ">
                         <asp:Button ID="btnLocalQuery" runat="server" class="btn" Text="查詢" style="cursor:pointer;" />

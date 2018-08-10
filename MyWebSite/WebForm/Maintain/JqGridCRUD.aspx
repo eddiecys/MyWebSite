@@ -36,7 +36,7 @@
         };
 
         //參數
-        var oPostData = { rYear: [""], createDateFrom: "", createDateTo: "" }
+        //var oPostData = { rYear: [""], createDateFrom: "", createDateTo: "" }
 
         $(function () {
             //xalert("document.ready start");
@@ -122,13 +122,12 @@
         //重新Query
         function queryData() {
 
-            //取得Query參數
-            getPostParam();
-            //alert("getPostParam()");
-
             if (!checkDateRange($("#txtCreateDateFrom").val(), $("#txtCreateDateTo").val())) {
                 ShowMsg("日期起迄錯誤!", "Warning");
             } else {
+                //取得Query參數
+                var oPostData = getPostParam();
+                
                 // loadonce: true 後,datatype會變成local, 造成 trigger("reloadGrid") 無效, 都抓client data, 要重新把datatype:'json'
 //                $("#grid").jqGrid('setGridParam', { url: "JqGridCRUD.aspx/Query", mtype: 'POST', datatype: 'json', postData: oPostData, page: 1 }).trigger("reloadGrid");
                 console.log("reload start=> " + JSON.stringify(oPostData));
@@ -144,17 +143,32 @@
         //取得Query參數
         function getPostParam() {
 
-            //var rYearValue = $("#" + ClientIDs.ddlRYear).val();
-            var rYearValue = $("[id$=ddlRYear]").val() || "";
-            oPostData.rYear = rYearValue == "" ? [""] : rYearValue;
-//            oPostData.rYear = rYearValue;
+            var yearList = $("[id$=ddlRYear]").val() == null ? [""] : $("#ddlRYear").val();
+            
+            var strYear = yearList.join(",");
+            //$(yearList).each(function (index, item) {
+            //    alert(yearList[index]);
+            //    //$("#tabs").tabs("enable", parseInt(item));
+            //});
 
-            oPostData.createDateFrom = $("[id$=txtCreateDateFrom]").val() || "";
-            oPostData.createDateTo = $("[id$=txtCreateDateTo]").val() || "";
-            //return oPostData;
+            var PostData =
+                {
+                    rYear: strYear,
+                    createDateFrom: $("[id$=txtCreateDateFrom]").val() || "",
+                    createDateTo: $("[id$=txtCreateDateTo]").val() || ""
+                };
 
-            console.log(JSON.stringify(oPostData));
-            //alert(JSON.stringify(oPostData));
+//            delete PostData.createDateFrom;
+//            console.log(PostData["rYear"]);
+
+            //var rYearValue = $("[id$=ddlRYear]").val() || "";
+            //oPostData.rYear = rYearValue == "" ? [""] : rYearValue;
+            //oPostData.createDateFrom = $("[id$=txtCreateDateFrom]").val() || "";
+            //oPostData.createDateTo = $("[id$=txtCreateDateTo]").val() || "";
+
+            //console.log(JSON.stringify(PostData));
+
+            return PostData;
         }
 
         function LoadDefault() {
@@ -172,9 +186,6 @@
             // $("[id$=ddlRYear] option").clone().appendTo($("[id$=dl_ddl_R_YEAR]"));
             //$("[id$=ddlRYear]").val("2000");
 
-
-            //getPostParam();
-
 //            var urlpath = "Query";
             var urlpath = "QueryDapper";
 
@@ -182,7 +193,7 @@
             grid.jqGrid({
                 url: "JqGridCRUD.aspx/" + urlpath,
                 datatype: "json",
-                postData: oPostData,
+                postData: { rYear: "", createDateFrom: "", createDateTo: "" }, //oPostData,
                 mtype: 'POST',
                 ajaxGridOptions: { contentType: 'application/json; charset=utf-8' },
                 serializeGridData: function (postData) {

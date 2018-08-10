@@ -11,6 +11,10 @@ namespace MyWebSite
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            //string log4netPath = Server.MapPath("~/log4net.config");
+            //log4net.Config.XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo(log4netPath));
         }
+
+
     }
 }
